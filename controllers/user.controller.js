@@ -100,12 +100,17 @@ exports.signIn = (req, res) => {
 
 exports.getNewWord = async (req, res) => {
   try {
+
+    const minWordLength = req.params.minWordLength;
+    const maxWordLength = req.params.maxWordLength;
+
+
     const result = JSON.parse(
       JSON.stringify(
         await Dictionary.findAll({
           where: {
             wordLength: {
-              [Op.lte]: 8,
+              [Op.between]: [minWordLength,maxWordLength],
             },
           },
           order: Sequelize.literal('rand()'), limit: 1

@@ -90,13 +90,17 @@ router.get(
 );
 
 router.get(
-  "/getNewWord/:gameDifficulty",
+  "/getNewWord/:minWordLength/:maxWordLength",
   checkToken,
   validate([
-    check("gameDifficulty")
+    check("minWordLength")
       .not()
       .isEmpty()
-      .withMessage("Please Provide the valid Game Difficulty."),
+      .withMessage("Please Provide the valid Minimum Word Length."),
+    check("maxWordLength")
+      .not()
+      .isEmpty()
+      .withMessage("Please Provide the valid Maximum Word Length."),
   ]),
   controller.getNewWord
 );
