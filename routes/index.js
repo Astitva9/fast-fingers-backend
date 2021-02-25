@@ -68,11 +68,11 @@ router.put(
     check("userID")
       .not()
       .isEmpty()
-      .withMessage("Please Enter the valid User ID."),
+      .withMessage("Please Provide the valid User ID."),
     check("userScore")
       .not()
       .isEmpty()
-      .withMessage("Please Enter the User Score."),
+      .withMessage("Please Provide the User Score."),
   ]),
   scoreController.storeScore
 );
@@ -84,9 +84,21 @@ router.get(
     check("userID")
       .not()
       .isEmpty()
-      .withMessage("Please Enter the valid User ID."),
+      .withMessage("Please Provide the valid User ID."),
   ]),
   scoreController.getScore
+);
+
+router.get(
+  "/getNewWord/:gameDifficulty",
+  checkToken,
+  validate([
+    check("gameDifficulty")
+      .not()
+      .isEmpty()
+      .withMessage("Please Provide the valid Game Difficulty."),
+  ]),
+  controller.getNewWord
 );
 
 module.exports = router;
