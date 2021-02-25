@@ -23,7 +23,7 @@ exports.signup = async (req, res) => {
         {
           result: body.EMAIL,
         },
-        "pesto",
+        process.env.JWTSECRET,
         {
           expiresIn: "24h",
         }
@@ -33,6 +33,7 @@ exports.signup = async (req, res) => {
         status: true,
         message: "Registered Successfully",
         token: jsonToken,
+        userID:user_details.id
       });
     } else {
       return res.status(500).json({
@@ -73,14 +74,15 @@ exports.signIn = (req, res) => {
 
       const jsonToken = jwt.sign({
         result: user.email
-       }, "pesto", {
+       }, process.env.JWTSECRET, {
         expiresIn: "24h"
        });
 
        return res.status(200).json({
         status: true,
         message: "Logged in successfully",
-        token: jsonToken
+        token: jsonToken,
+        userID:user.id
        });
     })
     .catch(err => {

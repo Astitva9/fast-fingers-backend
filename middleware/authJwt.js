@@ -5,10 +5,10 @@ module.exports = {
     if (token) {
       // Remove Bearer from string
       token = token.slice(7);
-      jwt.verify(token, 'pesto', (err, decoded) => {
+      jwt.verify(token, process.env.JWTSECRET, (err, decoded) => {
         if (err) {
           return res.json({
-            success: 0,
+            success: false,
             message: "Invalid Token..."
           });
         } else {
@@ -18,7 +18,7 @@ module.exports = {
       });
     } else {
       return res.json({
-        success: 0,
+        success: false,
         message: "Access Denied! Unauthorized User"
       });
     }
