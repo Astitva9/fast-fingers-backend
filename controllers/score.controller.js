@@ -55,4 +55,5 @@ exports.getScore = async (req, res) => {
       message: error,
     });
   }
+  
 };
