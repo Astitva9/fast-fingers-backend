@@ -105,4 +105,14 @@ router.get(
   controller.getNewWord
 );
 
+router.get(
+  "/verifyUserToken",
+  checkToken,
+  (req, res)=>{
+    return res.status(200).json({
+      status: true
+    });
+  }
+);
+
 module.exports = router;
